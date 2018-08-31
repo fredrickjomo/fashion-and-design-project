@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Adala E-Fashion') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -36,10 +36,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="" style="color: white;padding-right: 20px"><i class="fa fa-female"></i>&nbsp;{{ __('WOMEN') }}</a>
+                        <a class="nav-link" href="{{route('women_products')}}" style="color: white;padding-right: 20px"><i class="fa fa-female"></i>&nbsp;{{ __('WOMEN') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" style="color: white;"><i class="fa fa-male"></i>&nbsp;{{ __('MEN') }}</a>
+                        <a class="nav-link" href="{{route('men_products')}}" style="color: white;"><i class="fa fa-male"></i>&nbsp;{{ __('MEN') }}</a>
                     </li>&nbsp;
 
 

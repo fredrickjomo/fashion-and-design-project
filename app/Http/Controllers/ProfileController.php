@@ -28,6 +28,40 @@ class ProfileController extends Controller
     {
         //
     }
+    public function buyer_profile_update(Request $request,$total)
+    {
+        $validatedData = request()->validate([
+            'location' => 'string|min:4|max:20|required',
+            'phone' => 'string|min:10|required|unique:profiles',
+            'p_address' => 'required',
+            'p_code' => 'string|required|min:4|max:6',
+            'image' => 'required|file|mimes:jpeg,jpg,bmp,png,svg|max:5000',
+        ]);
+        if($validatedData){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $fileName = rand(00000001, 99999999) . '.' . $extension;
+            if ($request->hasFile('image')) {
+                $profile = Profile::create([
+                    'location' => $request->input('location'),
+                    'user_id' => $request->user()->id,
+                    'phone' => $request->input('phone'),
+                    'p_address' => $request->input('p_address'),
+                    'p_code' => $request->input('p_code'),
+                    'image' => $fileName,
+                    Input::file('image')->move(storage_path() . '/app/public/images/profiles/', $fileName),
+
+                ]);
+                if($profile){
+                    flash('Profile updated successfully, Proceed with the checkout process.')->success()->important();
+                    return redirect('/cart');
+                }
+                flash('Profile could not be updated successfully...please try again')->error();
+                return redirect()->back();
+            }
+        }
+
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -60,7 +94,7 @@ class ProfileController extends Controller
         ]);
             if($profile){
                 flash('Profile updated successfully')->success()->important();
-                return redirect('/home');
+                return redirect('/designer-home');
             }
             flash('Profile could not be updated successfully...please try again')->error();
             return redirect()->back();

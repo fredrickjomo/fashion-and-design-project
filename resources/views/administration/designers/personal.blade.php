@@ -9,7 +9,7 @@
             <label for="location" class="col-md-4 col-form-label text-md-right">Location</label>
 
             <div class="col-md-6">
-                <input id="location" type="text" class="form-control{{ $errors->has('location') ? ' is-invalid' : '' }}" name="location" value="{{ old('location') }}" required autofocus>
+                <input id="location" placeholder="e.g Nakuru" type="text" class="form-control{{ $errors->has('location') ? ' is-invalid' : '' }}" name="location" value="{{ old('location') }}" required autofocus>
             @if ($errors->has('location'))
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('location') }}</strong>
@@ -22,7 +22,7 @@
             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone Number</label>
 
             <div class="col-md-6">
-                <input id="phone" type="text" maxlength="13" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{old('phone')}}"required>
+                <input id="phone" placeholder="e.g 0703 xxx xxx" type="text" maxlength="13" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{old('phone')}}"required>
 
                 @if ($errors->has('phone'))
                     <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
             <label for="p_address" class="col-md-4 col-form-label text-md-right">Postal Address</label>
 
             <div class="col-md-6">
-                <input id="p_address" type="text" class="form-control{{ $errors->has('p_address') ? ' is-invalid' : '' }}" name="p_address" value="{{ old('p_address') }}"  autofocus >
+                <input id="p_address" placeholder="e.g 123" type="text" class="form-control{{ $errors->has('p_address') ? ' is-invalid' : '' }}" name="p_address" value="{{ old('p_address') }}"  autofocus >
                 @if ($errors->has('p_address'))
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('p_address') }}</strong>
@@ -60,7 +60,7 @@
             <label for="p_code" class="col-md-4 col-form-label text-md-right">Postal Code</label>
 
             <div class="col-md-6">
-                <input id="p_code" type="number" class="form-control{{ $errors->has('p_code') ? ' is-invalid' : '' }}" name="p_code" value="{{ old('p_code') }}" required autofocus>
+                <input id="p_code" type="number" placeholder="e.g 40200" class="form-control{{ $errors->has('p_code') ? ' is-invalid' : '' }}" name="p_code" value="{{ old('p_code') }}" required autofocus>
                 @if ($errors->has('p_code'))
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('p_code') }}</strong>

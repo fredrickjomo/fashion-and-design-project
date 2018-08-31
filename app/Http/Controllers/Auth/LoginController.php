@@ -42,6 +42,9 @@ class LoginController extends Controller
         if($user->user_type==='admin'){
             return redirect()->route('admin');
         }
+        if($user->user_type==='designer'){
+            return redirect('/designer-home');
+        }
         return redirect()->intended('/home');
     }
 }

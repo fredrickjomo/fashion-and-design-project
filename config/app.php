@@ -161,6 +161,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //mpesa api providers
+        Safaricom\Mpesa\MpesaServiceProvider::class,
+
+        //laravel braintree providers
+        Laravel\Cashier\CashierServiceProvider::class,
+
+        //pdf
+        Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -210,6 +218,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Mpesa'=>\Safaricom\Mpesa\MpesaServiceProvider::class,
+        //pdf
+        'PDF'=>Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage'=>Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 

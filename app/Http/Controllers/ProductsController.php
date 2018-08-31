@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Auth;
 
 class ProductsController extends Controller
 {
@@ -32,6 +34,19 @@ class ProductsController extends Controller
         //
         return view('administration/products.add');
     }
+    public function men_products(){
+//        $cart_contents=Cart::content()->groupBy('id');
+//
+//        dd($cart_contents);
+        $product=Product::where('category','male')->orderBy('created_at','desc')
+            ->paginate(9);
+        return view('products.men',compact('product'));
+    }
+    public function  women_products(){
+        $product=Product::where('category','female')->orderBy('created_at','desc')
+            ->paginate(9);
+        return view('products.women',compact('product'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,6 +60,7 @@ class ProductsController extends Controller
       $validatedData = request()->validate([
             'name' => 'string|min:4|max:20|required|unique:products',
             'description' => 'string|min:10|required',
+            'category'=>'required',
             'price' => 'required',
             'image' => 'required|file|mimes:jpeg,jpg,bmp,png,svg,pdf|max:5000',
         ]);
@@ -55,8 +71,10 @@ class ProductsController extends Controller
                  $product = Product::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
+                'category'=>$request->input('category'),
                 'price' => $request->input('price'),
                 'slug'=>str_slug($request['name']),
+                'designer_id'=>Auth::user()->id,
                 'image' => $fileName,
                 Input::file('image')->move(storage_path() . '/app/public/images/products/', $fileName),
             ]);

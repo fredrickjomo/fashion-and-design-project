@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -27,20 +30,30 @@ class HomeController extends Controller
     public function index()
     {
      //
-      $usertype=DB::table('users')->where('user_type','designer')->
-      where('id',Auth::user()->id)->exists();
-        $exists=DB::table('profiles')->where('user_id',Auth::user()->id)->exists();
-     // dd($exists);
-      if ($usertype==true && $exists==false){
-          return view('administration/designers.personal');
-
-      }else{
-          $product=Product::orderBy('created_at','desc')->paginate(9);
-          return view('home',compact('product'));
-      }
+        //$product=Product::orderBy('created_at','desc')->paginate(9);
+        $product=DB::table('products')
+            ->select('products.name','products.slug','products.description','products.price','products.image','products.category','users.name as designer')
+           ->join('users',function ($join){
+               $join->on('users.id','=','products.designer_id');
+           })
+            ->orderByDesc('products.created_at')
+            ->paginate(9);
+        //dd($product);
+        $men_product_count=DB::table('products')
+            ->where('category','men')
+            ->count();
+        $women_product_count=DB::table('products')
+            ->where('category','female')
+            ->count();
+        return view('/home',compact('product','men_product_count','women_product_count'));
 
     }
     public function error(){
         return view('/page_not_found');
+    }
+    public function pdf(){
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->inline();
     }
 }

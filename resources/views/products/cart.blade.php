@@ -83,7 +83,8 @@
                             </tbody>
                         </table>
                         <a href="{{ url('/') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
-                        <a href="#" class="btn btn-success btn-lg">Proceed to Checkout</a>
+                    <p style="display: none">{{$total=Cart::total()}}</p>
+                        <a href='{{url("/buy-product/{$total}")}}' class="btn btn-success btn-lg">Proceed to Checkout</a>
 
 
                     @else

@@ -1,0 +1,11 @@
+.card-body ul li{
+    padding-bottom: 30px;
+}
+.card-body ul li a{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+.card-body ul #mpesa{
+    color: green;
+}

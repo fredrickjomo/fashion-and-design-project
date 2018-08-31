@@ -10,7 +10,7 @@
         <p><a href="">Days Open</a></p>
         <p><a href="">Our Payment Methods</a></p>
         <p><a href="">Ask Us any Question</a></p>
-        <p><a href="">Delivery Services</a></p>
+        <p><a href="{{route('pdf')}}">Delivery Services</a></p>
     </div>
     </div>
     <div class="row justify-content-center">
@@ -18,10 +18,10 @@
         <div class="col-md-3 left-sidebar">
             <ul>
                 <p style="color: #0000F0;text-decoration: underline;text-align: center">Quick Links</p>
-                <a href=""><li>Women:&nbsp;<span>(10)</span></li></a>
-                <a href=""><li>Men:&nbsp;<span>(10)</span></li></a>
+                <a href="{{route('women_products')}}"><li>Women:&nbsp;<span>({{$women_product_count}})</span></li></a>
+                <a href="{{route('men_products')}}"><li>Men:&nbsp;<span>({{$men_product_count}})</span></li></a>
                 <a href=""><li>New fashion&nbsp;</li></a>
-                <a href=""><li>Our designers&nbsp;</li></a>
+                <a href="{{route('designers')}}"><li>Our designers&nbsp;</li></a>
                 <h6 class="text-center" style="text-decoration: underline;font-weight: bold;">
                     Available Colors</h6>
                 <li>Blue</li>
@@ -60,14 +60,23 @@
                                <div class="card-footer">
                                    <b style="color: #1b1e21;">Desc:</b>{{$products->description}}<br>
                                    <b style="color: #1b1e21;">Price:</b>Kshs. {{$products->price}}<br>
-                                   <b style="color: #1b1e21;">Sizes:</b> S,M,L,XL</div>
+                                   <b style="color: #1b1e21;">Designer:</b> {{$products->designer}}<br>
+                                   <b style="color: #1b1e21;">For:</b>
+                                   @if($products->category=='male')
+                                       Men
+                                       @elseif($products->category=='general')
+                                           General Use
+                                       @else
+                                   Women
+                                       @endif
+                               </div>
                            </div>
                            </a>
                        </div>
 
                        @endforeach
 
-
+                           {{$product->links()}}
 
                    </div>
                 </div>
